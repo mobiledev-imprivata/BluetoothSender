@@ -133,7 +133,7 @@ class ViewController: UIViewController {
     }
     
     func serviceChanged(sender: AnyObject) {
-        let message = "Service " + String(sender.tag - 100) + " switched " + ((sender as UISwitch).on ? "on" : "off")
+        let message = "Service " + String(sender.tag - 100) + " switched " + ((sender as! UISwitch).on ? "on" : "off")
         println(message)
         if isPoweredOn {
             updateServices()
@@ -158,7 +158,7 @@ class ViewController: UIViewController {
         peripheralManager.removeAllServices()
         var services = Array<CBMutableService>()
         for i in 1 ... nServiceSwitches {
-            let serviceSwitch: UISwitch = view.viewWithTag(100 + i) as UISwitch
+            let serviceSwitch: UISwitch = view.viewWithTag(100 + i) as! UISwitch
             if serviceSwitch.on {
                 let service = createService(serviceUUIDs[i - 1])
                 var characteristics = Array<CBMutableCharacteristic>()
@@ -180,7 +180,7 @@ class ViewController: UIViewController {
         println("startAdvertising")
         var uuids = Array<CBUUID>()
         for i in 1 ... nServiceSwitches {
-            let serviceSwitch: UISwitch = view.viewWithTag(100 + i) as UISwitch
+            let serviceSwitch: UISwitch = view.viewWithTag(100 + i) as! UISwitch
             if serviceSwitch.on {
                 uuids.append(CBUUID(string: serviceUUIDs[i - 1]))
             }
